@@ -1,0 +1,2 @@
+ettercap (T1)
+urlsnarf -i wlan0(T2) (watch remotly activity)
